@@ -82,7 +82,7 @@ class _SAConnectionContextManager(_ContextManager):
         try:
             return (yield from self._obj.__anext__())
         except StopAsyncIteration:
-            self._obj.close()
+            yield from self._obj.close()
             self._obj = None
             raise
 
